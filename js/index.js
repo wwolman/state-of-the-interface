@@ -12,15 +12,24 @@ let maxX = docW - winW
 let pctY = Math.round(winY / Math.max(maxY, 1) * 100)
 let pctX = Math.round(winX / Math.max(maxX, 1) * 100)
 
-let $third = document.querySelector('.full-viewport:nth-child(3)')
-let thirdTop = $third.getBoundingClientRect().top
+let infoForElement = ''
 
 
-if (thirdTop < winH / 2){
-    console.log(`Above Viewport Half`)
-} else {
-    console.log(`Below viewport half`)
+let checkOneSection = ($sec) => {
+    let fromD = $sec.offsetTop
+    let fromW = $sec.getBoundingClientRect().top
+    if (fromW < winH / 2) {
+        infoForElement += `<li>The third section is <strong>above</strong> the window's midpoint</li>`
+    }  else {
+        infoForElement += `<li>The third section is <strong>below</strong> the window's midpoint</li>`
+    }
 }
+
+let $third = document.querySelector('.full-viewport:nth-child(3)')
+checkOneSection($third)
+
+
+
 
 
 document.querySelector('.panel').innerHTML = `
@@ -31,8 +40,9 @@ document.querySelector('.panel').innerHTML = `
         <li>That's <strong>${pctY}</strong> % of <strong>${maxY}</strong> vertically </li>
         <li>That's <strong>${pctX}</strong>  % of <strong>${maxX}</strong> horizontally </li>
     </ol>
-    <li>The third section is <strong>${$third.offsetTop}</strong> px from the top of the document</li>
-    <li>The third section is <strong>${$third.getBoundingClientRect().top}</strong> from the top of the viewport / window</li>
+    <li></li>
+    <li></li>
+    ${infoForElement}
 `
 }
 
