@@ -19,20 +19,18 @@ let checkOneSection = ($sec) => {
     let fromD = $sec.offsetTop
     let fromW = $sec.getBoundingClientRect().top
     if (fromW < winH / 2) {
-        infoForElement += `<li>The third section is <strong>above</strong> the window's midpoint</li>`
+        infoForElement += `<li class="past">${$sec.querySelector('h2').textContent}`
     }  else {
-        infoForElement += `<li>The third section is <strong>below</strong> the window's midpoint</li>`
+        infoForElement += `<li>${$sec.querySelector('h2').textContent}`
     }
 }
 
-let $third = document.querySelector('.full-viewport:nth-child(3)')
-checkOneSection($third)
 
-
-
+document.querySelectorAll('.full-viewport').forEach(checkOneSection)
 
 
 document.querySelector('.panel').innerHTML = `
+<h2>Page Stats</h2>
 <li>The Window is <strong>${winH}</strong> px tall, <strong>${winW}</strong> px wide </li>
 <li>The Document is <strong>${docH}</strong> px tall, <strong>${docW}</strong> px wide </li>
 <li>The Window has scrolled <strong>${winY}</strong> px tall, <strong>${winX}</strong> px wide </li>
@@ -41,8 +39,9 @@ document.querySelector('.panel').innerHTML = `
         <li>That's <strong>${pctX}</strong>  % of <strong>${maxX}</strong> horizontally </li>
     </ol>
     <li></li>
+    <ol> ${infoForElement} </ol>
     <li></li>
-    ${infoForElement}
+   
 `
 }
 
