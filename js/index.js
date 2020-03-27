@@ -25,7 +25,7 @@ let checkOneSection = ($sec) => {
     }
 }
 
-
+// Iterate though each matching element call the checkonesection function for each one
 document.querySelectorAll('.full-viewport').forEach(checkOneSection)
 
 
